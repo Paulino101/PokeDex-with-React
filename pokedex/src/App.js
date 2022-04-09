@@ -7,31 +7,48 @@ function App() {
   
   // state
   const [pokemon, setPokemon] = useState([]);
-  const [pokeType, setPokeType] = useState(null);
-  const [sprite, setSprite] = useState('https://archives.bulbagarden.net/media/upload/6/66/Spr_RG_Red_1.png');
+  // poketypes  gives an array
+  const [pokeType, setPokeType] = useState([]);
+  const [sprite, setSprite] = useState('');
   const [input, setInput] = useState(null);
   const [submit, setSubmit] = useState(false)
   // variables
   const url = `https://pokeapi.co/api/v2/pokemon/${input}`;
   // axios api request
-  const apiCall = async () => {
-     axios.get(url).then( (res) => {
+  // const apiCall = () => {
+  //    axios.get(url).then( (res) => {
       
-      setPokemon(res.data);
-      setSprite(pokemon.sprites.front_default);
-      setPokeType(pokemon.types)
-      console.log(pokemon);
-      console.log(pokeType)
-    });
-  };
+  //     setPokemon(res.data);
+      
+  //     console.log(pokemon);
+  //     console.log(pokeType)
+  //     console.log(sprite)
+  //   })
+  //   .catch(err => {
+  //     console.log('something went wrong')
+  //     console.log(err)
+  //   });
+  // };
+  // async
+  const apiCall = async () => {
+    try {
+      const res = await axios.get(url)
+      setPokemon(res.data)
+      setSprite(res.data.sprites.front_default);
+      setPokeType(res.data.types)
+      console.log(pokemon)
+    } catch (err){
+      console.log({err})
+    }
+  }
   // functions
   const getInput = (e) =>{
     setInput(e.target.value)
     setSubmit(false)
-    console.log(input)
   }
   const handleSearch = (e) => {
     setSubmit(true)
+    
   }
 // wrapper function
   const handleSubmit = (e) => {
