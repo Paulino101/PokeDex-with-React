@@ -13,7 +13,7 @@ function PokemonOverview({ name, id, sprite, pokeType }) {
           <img src="https://pokeapi.co/api/v2/type/12/" alt="" />
           {/* maps through typing of mon */}
           <ul className="card-text text-capitalize">{pokeType.map(t => (<li>{t.type.name}</li>))}</ul>
-          <a href="#" className="btn btn-primary">Go somewhere</a>
+          <a href="https://github.com/Paulino101" className="btn btn-primary">GitHub</a>
         </div>
       </div>
   );

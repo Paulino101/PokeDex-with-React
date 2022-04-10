@@ -7,7 +7,6 @@ function App() {
   
   // state
   const [pokemon, setPokemon] = useState([]);
-  // poketypes  gives an array
   const [pokeType, setPokeType] = useState([]);
   const [sprite, setSprite] = useState('');
   const [input, setInput] = useState(null);
@@ -15,28 +14,13 @@ function App() {
   // variables
   const url = `https://pokeapi.co/api/v2/pokemon/${input}`;
   // axios api request
-  // const apiCall = () => {
-  //    axios.get(url).then( (res) => {
-      
-  //     setPokemon(res.data);
-      
-  //     console.log(pokemon);
-  //     console.log(pokeType)
-  //     console.log(sprite)
-  //   })
-  //   .catch(err => {
-  //     console.log('something went wrong')
-  //     console.log(err)
-  //   });
-  // };
-  // async
+  
   const apiCall = async () => {
     try {
       const res = await axios.get(url)
       setPokemon(res.data)
       setSprite(res.data.sprites.front_default);
       setPokeType(res.data.types)
-      console.log(pokemon)
     } catch (err){
       console.log({err})
     }
@@ -45,6 +29,7 @@ function App() {
   const getInput = (e) =>{
     setInput(e.target.value)
     setSubmit(false)
+    setSprite('')
   }
   const handleSearch = (e) => {
     setSubmit(true)
